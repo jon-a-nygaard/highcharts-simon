@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/jon-a-nygaard/highcharts-simon/issues"
   },
-  "homepage": "https://github.com/jon-a-nygaard/highcharts-simon#readme"
+  "homepage": "https://github.com/jon-a-nygaard/highcharts-simon#readme",
+  "devDependencies": {
+    "highcharts": "^4.2.5"
+  }
 }
