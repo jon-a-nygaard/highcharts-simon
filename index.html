@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+	<script type="text/javascript" src="simon.js"></script>
+	<title>Highcharts Simon</title>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/javascript">
+		var chart = Highcharts.chart('container', {
+			series: [{
+				type: 'simon'
+			}]
+		});
+	</script>
+</body>
+</html>
