@@ -19,23 +19,22 @@
 					return pick(a.options.index, a._i) - pick(b.options.index, b._i);
 				};
 
+			series.chart = chart; // setOptions requires the attribute this.chart
+			options = series.setOptions(options); // merge with plotOptions
 			extend(series, {
-				chart: chart,
-				linkedSeries: []
-			})
-			series.options = options = series.setOptions(options); // merge with plotOptions
-
-			// bind the axes
-			series.bindAxes();
-
-			// set some variables
-			extend(series, {
-				name: options.name,
+				options: options,
 				state: "",
+				name: options.name,
+				linkedSeries: [],
 				pointAttr: {},
 				visible: options.visible !== false, // true by default
 				selected: options.selected === true // false by default
 			});
+			series.getColor();
+			series.getSymbol();
+
+			// bind the axes
+			series.bindAxes();
 
 			// register event listeners
 			events = options.events;
@@ -50,8 +49,6 @@
 				chart.runTrackerClick = true;
 			}
 
-			series.getColor();
-			series.getSymbol();
 
 			// Set the data
 			each(series.parallelArrays, function (key) {
