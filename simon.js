@@ -7,9 +7,12 @@
 		stableSort = H.stableSort;
 
 	plotOptions.simon = H.merge(plotOptions.pie, {
-
+		dataLabels: {
+			enabled: false
+		}
 	});
 	seriesTypes.simon = H.extendClass(seriesTypes.pie, {
+		type: 'simon',
 		init: function (chart, options) {
 			var series = this,
 				eventType,
