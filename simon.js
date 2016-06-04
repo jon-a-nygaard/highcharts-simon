@@ -1,5 +1,4 @@
 (function () {
-	console.log(Highcharts)
 	var H = Highcharts,
 		seriesTypes = H.seriesTypes,
 		plotOptions = H.getOptions().plotOptions,
@@ -20,9 +19,11 @@
 					return pick(a.options.index, a._i) - pick(b.options.index, b._i);
 				};
 
-			series.chart = chart;
+			extend(series, {
+				chart: chart,
+				linkedSeries: []
+			})
 			series.options = options = series.setOptions(options); // merge with plotOptions
-			series.linkedSeries = [];
 
 			// bind the axes
 			series.bindAxes();
@@ -35,11 +36,6 @@
 				visible: options.visible !== false, // true by default
 				selected: options.selected === true // false by default
 			});
-
-			// special
-			if (H.useCanVG) {
-				options.animation = false;
-			}
 
 			// register event listeners
 			events = options.events;
