@@ -7,6 +7,7 @@
 		stableSort = H.stableSort;
 
 	plotOptions.simon = H.merge(plotOptions.pie, {
+		colors: ['red', 'blue', 'yellow', 'green'],
 		dataLabels: {
 			enabled: false
 		}
@@ -43,7 +44,7 @@
 			each(series.parallelArrays, function (key) {
 				series[key + 'Data'] = [];
 			});
-			series.setData([1, 1, 1, 1], false);
+			series.setData([1, 1, 1, 1], false); // @todo Let users set their own data.
 
 			// bind the axes
 			series.bindAxes();
