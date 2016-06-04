@@ -15,6 +15,7 @@
 				eventType,
 				events,
 				chartSeries = chart.series,
+				index = chartSeries.length - 1,
 				sortByIndex = function (a, b) {
 					return pick(a.options.index, a._i) - pick(b.options.index, b._i);
 				};
@@ -24,14 +25,22 @@
 			extend(series, {
 				options: options,
 				state: "",
-				name: options.name,
+				name: options.name || 'Series ' + (index + 1),
+				index: index,
 				linkedSeries: [],
 				pointAttr: {},
+				_i: index,
 				visible: options.visible !== false, // true by default
 				selected: options.selected === true // false by default
 			});
 			series.getColor();
 			series.getSymbol();
+
+			// Set the data
+			each(series.parallelArrays, function (key) {
+				series[key + 'Data'] = [];
+			});
+			series.setData([1, 1, 1, 1], false);
 
 			// bind the axes
 			series.bindAxes();
@@ -49,32 +58,8 @@
 				chart.runTrackerClick = true;
 			}
 
-
-			// Set the data
-			each(series.parallelArrays, function (key) {
-				series[key + 'Data'] = [];
-			});
-			series.setData([1, 1, 1, 1], false);
-
-			// Mark cartesian
-			if (series.isCartesian) {
-				chart.hasCartesianSeries = true;
-			}
-
 			// Register it in the chart
 			chartSeries.push(series);
-			series._i = chartSeries.length - 1;
-
-			// Sort series according to index option (#248, #1123, #2456)
-			stableSort(chartSeries, sortByIndex);
-			if (this.yAxis) {
-				stableSort(this.yAxis.series, sortByIndex);
-			}
-
-			each(chartSeries, function (series, i) {
-				series.index = i;
-				series.name = series.name || 'Series ' + (i + 1);
-			});
 		}
 	});
 }());
