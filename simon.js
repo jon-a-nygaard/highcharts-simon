@@ -1,11 +1,15 @@
 (function () {
 	var H = Highcharts,
+		addEvent = H.addEvent,
 		seriesTypes = H.seriesTypes,
 		defaultOptions = H.getOptions(),
 		plotOptions = defaultOptions.plotOptions,
 		extend = H.extend,
 		each = H.each,
-		stableSort = H.stableSort;
+		stableSort = H.stableSort,
+		randomNumber = function (min, max, decimals) {
+			return (Math.random() * (max - min) + min).toFixed(decimals);
+		};
 
 	// @notice Should there be a series.tooltip.enabled to exclude a series from the tooltip.
 	defaultOptions.tooltip.enabled = false; 
@@ -14,6 +18,16 @@
 		colors: ['red', 'blue', 'yellow', 'green'],
 		dataLabels: {
 			enabled: false
+		},
+		events: {
+			click: function (event) {
+				var index = event.point.index,
+					next = randomNumber(0, 4, 0);
+				// @todo validate index
+				// @todo play sequence
+				// @todo add next to sequence
+				// @todo show total
+			}
 		}
 	});
 	seriesTypes.simon = H.extendClass(seriesTypes.pie, {
