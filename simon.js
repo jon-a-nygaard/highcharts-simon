@@ -1,10 +1,14 @@
 (function () {
 	var H = Highcharts,
 		seriesTypes = H.seriesTypes,
-		plotOptions = H.getOptions().plotOptions,
+		defaultOptions = H.getOptions(),
+		plotOptions = defaultOptions.plotOptions,
 		extend = H.extend,
 		each = H.each,
 		stableSort = H.stableSort;
+
+	// @notice Should there be a series.tooltip.enabled to exclude a series from the tooltip.
+	defaultOptions.tooltip.enabled = false; 
 
 	plotOptions.simon = H.merge(plotOptions.pie, {
 		colors: ['red', 'blue', 'yellow', 'green'],
